@@ -1,0 +1,25 @@
+<div class="question-result-container">
+  <div class="question-result-question">
+    {{ index + 1 }}. {{ questionAnswer.questionText }}
+  </div>
+  <div class="question-result-answer">
+    <ng-container *ngIf="isCheckbox">
+      <ul class="question-result-list">
+        <li *ngFor="let answer of selectedAnswers">
+          {{ answer.answer }}
+        </li>
+        <li *ngIf="questionAnswer.answer">
+          Other - {{ questionAnswer.answer }}
+        </li>
+        <li *ngIf="selectedAnswers.length === 0 && !questionAnswer.answer">
+          No Data
+        </li>
+      </ul>
+    </ng-container>
+    <ng-container *ngIf="!isCheckbox">
+      <p>
+        {{ questionAnswer.answer || "No Data" }}
+      </p>
+    </ng-container>
+  </div>
+</div>

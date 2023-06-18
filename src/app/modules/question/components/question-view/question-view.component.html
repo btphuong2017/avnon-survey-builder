@@ -1,0 +1,91 @@
+<ng-container
+  *ngIf="isCheckbox; then checkboxQuestion; else paragraphQuestion"
+></ng-container>
+
+<ng-template #checkboxQuestion>
+  <div class="question-view-container" [formGroup]="formGroup">
+    <nz-form-item class="question-view-question">
+      <nz-form-label class="question-view-question-text" [nzSpan]="24">
+        {{ index + 1 }}. {{ question.question }}
+        <ng-container *ngIf="question.required">*</ng-container>
+      </nz-form-label>
+      <nz-form-control
+        class="question-view-question-answers"
+        [nzSpan]="24"
+        [nzValidateStatus]="
+          formGroup.get('answers')?.touched && formGroup.get('answers')?.errors
+            ? 'error'
+            : 'success'
+        "
+        nzErrorTip="Please select your answer"
+      >
+        <ng-container formArrayName="answers">
+          <ng-container *ngFor="let answer of answers; let i = index">
+            <ng-container [formGroupName]="i">
+              <div class="question-view-question-answers-answer">
+                <label nz-checkbox formControlName="checked">
+                  {{ answer.get("answer")?.value }}
+                </label>
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+        <div
+          class="question-view-question-answers-answer"
+          *ngIf="question.canSpecify"
+        >
+          <label nz-checkbox formControlName="other"> Other </label>
+        </div>
+        <nz-form-control
+          *ngIf="formGroup.get('other')?.value"
+          [nzValidateStatus]="
+            formGroup.get('answer')?.touched && formGroup.get('answer')?.errors
+              ? 'error'
+              : 'success'
+          "
+          nzErrorTip="Please input your answer"
+        >
+          <div
+            class="question-view-question-other-answer"
+            style="margin-top: 8px"
+          >
+            <input
+              nz-input
+              placeholder="Type your other answer here"
+              formControlName="answer"
+            />
+          </div>
+        </nz-form-control>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+</ng-template>
+
+<ng-template #paragraphQuestion>
+  <div class="question-view-container" [formGroup]="formGroup">
+    <nz-form-item class="question-view-question">
+      <nz-form-label class="question-view-question-text" [nzSpan]="24">
+        {{ index + 1 }}. {{ question.question }}
+        <ng-container *ngIf="question.required">*</ng-container>
+      </nz-form-label>
+      <nz-form-control
+        class="question-view-question-answers"
+        [nzSpan]="24"
+        [nzValidateStatus]="
+          formGroup.get('answer')?.touched && formGroup.get('answer')?.errors
+            ? 'error'
+            : 'success'
+        "
+        nzErrorTip="Please input your answer"
+      >
+        <div class="question-view-question-answers-answer">
+          <textarea
+            nz-input
+            placeholder="Type your answer here"
+            formControlName="answer"
+          ></textarea>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+</ng-template>

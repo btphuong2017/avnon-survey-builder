@@ -1,0 +1,27 @@
+<nz-spin [nzSpinning]="loading" >
+  <div class="survey-builder-container" *ngIf="questions">
+    <div class="survey-builder-questions">
+      <ng-container *ngFor="let question of questions; let i = index;">
+        <app-question-view [question]="question" [index]="i" #questionViews></app-question-view>
+      </ng-container>
+    </div>
+    <div class="survey-builder-footer">
+      <nz-row>
+        <nz-col [nzSpan]="24">
+          <a
+            href="javascript: void(0)"
+            class="survey-builder-addnew"
+            (click)="addNewQuestion()"
+            >Add New Question</a
+          >
+        </nz-col>
+        <nz-col [nzSpan]="24" style="text-align: right" *ngIf="questions && questions.length > 0">
+          <button nz-button nzType="primary" (click)="reviewAnswers()" [nzLoading]="submitting">
+            Review my answers
+            <span nz-icon nzType="right" nzTheme="outline" style="font-size: 12px;"></span>
+          </button>
+        </nz-col>
+      </nz-row>
+    </div>
+  </div>
+</nz-spin>

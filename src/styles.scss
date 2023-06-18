@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+  background-color: #f5f5f5;
+}
+
+.ant-form-item-label > label.ant-form-item-required {
+  &::before {
+    position: absolute;
+    right: -16px;
+  }
+}

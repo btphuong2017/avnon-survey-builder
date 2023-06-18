@@ -1,0 +1,22 @@
+<nz-spin [nzSpinning]="loading" style="min-height: 150px">
+  <div class="survey-answers-container">
+    <div class="survey-answers-questions">
+      <ng-container
+        *ngFor="let questionAnswer of questionAnswers; let i = index"
+      >
+        <app-question-result
+          [index]="i"
+          [questionAnswer]="questionAnswer"
+        ></app-question-result>
+      </ng-container>
+    </div>
+    <div class="survey-answers-footer">
+      <nz-row>
+        <nz-col [nzSpan]="24">
+          <a class="survey-answers-back" [routerLink]="['/survey', 'builder']" >Back to Forms Builder</a
+          >
+        </nz-col>
+      </nz-row>
+    </div>
+  </div>
+</nz-spin>

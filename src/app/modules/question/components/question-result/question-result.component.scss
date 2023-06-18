@@ -1,0 +1,10 @@
+.question-result {
+  &-question {
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  &-list {
+    padding: 0;
+    list-style: none;
+  }
+}
